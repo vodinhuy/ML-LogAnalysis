@@ -1,0 +1,563 @@
+[
+	{
+		"hits": {
+			"count": 20,
+			"percent": "12.58"
+		},
+		"visitors": {
+			"count": 3,
+			"percent": "100.00"
+		},
+		"bytes": {
+			"count": 89021,
+			"percent": "3.94"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/index.php"
+	},
+	{
+		"hits": {
+			"count": 14,
+			"percent": "8.81"
+		},
+		"visitors": {
+			"count": 0,
+			"percent": "0.00"
+		},
+		"bytes": {
+			"count": 0,
+			"percent": "0.00"
+		},
+		"method": "---",
+		"protocol": "---",
+		"data": "-"
+	},
+	{
+		"hits": {
+			"count": 13,
+			"percent": "8.18"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 1774419,
+			"percent": "78.53"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/report.html"
+	},
+	{
+		"hits": {
+			"count": 10,
+			"percent": "6.29"
+		},
+		"visitors": {
+			"count": 3,
+			"percent": "100.00"
+		},
+		"bytes": {
+			"count": 41308,
+			"percent": "1.83"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/"
+	},
+	{
+		"hits": {
+			"count": 7,
+			"percent": "4.40"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 9951,
+			"percent": "0.44"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/login.php"
+	},
+	{
+		"hits": {
+			"count": 6,
+			"percent": "3.77"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 49807,
+			"percent": "2.20"
+		},
+		"method": "POST",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/javascript/"
+	},
+	{
+		"hits": {
+			"count": 4,
+			"percent": "2.52"
+		},
+		"visitors": {
+			"count": 3,
+			"percent": "100.00"
+		},
+		"bytes": {
+			"count": 18412,
+			"percent": "0.81"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/xss_d/"
+	},
+	{
+		"hits": {
+			"count": 4,
+			"percent": "2.52"
+		},
+		"visitors": {
+			"count": 3,
+			"percent": "100.00"
+		},
+		"bytes": {
+			"count": 17110,
+			"percent": "0.76"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/xss_r/"
+	},
+	{
+		"hits": {
+			"count": 4,
+			"percent": "2.52"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 16388,
+			"percent": "0.73"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/fi/?page=include.php"
+	},
+	{
+		"hits": {
+			"count": 4,
+			"percent": "2.52"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 16168,
+			"percent": "0.72"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/upload/"
+	},
+	{
+		"hits": {
+			"count": 4,
+			"percent": "2.52"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 21246,
+			"percent": "0.94"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/security.php"
+	},
+	{
+		"hits": {
+			"count": 3,
+			"percent": "1.89"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 13647,
+			"percent": "0.60"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/captcha/"
+	},
+	{
+		"hits": {
+			"count": 3,
+			"percent": "1.89"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 0,
+			"percent": "0.00"
+		},
+		"method": "POST",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/login.php"
+	},
+	{
+		"hits": {
+			"count": 2,
+			"percent": "1.26"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 9354,
+			"percent": "0.41"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/csrf/"
+	},
+	{
+		"hits": {
+			"count": 2,
+			"percent": "1.26"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 12243,
+			"percent": "0.54"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/javascript/"
+	},
+	{
+		"hits": {
+			"count": 2,
+			"percent": "1.26"
+		},
+		"visitors": {
+			"count": 2,
+			"percent": "66.67"
+		},
+		"bytes": {
+			"count": 0,
+			"percent": "0.00"
+		},
+		"method": "POST",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/security.php"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 4866,
+			"percent": "0.22"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/xss_s/"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/xss_r/?name=&lt;script&gt;alert(&#39;XXS+Attacked&#39;)&lt;/script&gt;&amp;user_token=887e2006faf1ef4032d1c95b740bbc9e"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 4742,
+			"percent": "0.21"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/csrf/?password_current=123&amp;password_new=123&amp;password_conf=123&amp;Change=Change&amp;user_token=424c010f2d347ec6d9361762ec43924e"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 4267,
+			"percent": "0.19"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/csp/"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/?id=%&#39;+or+&#39;0&#39;=&#39;0&amp;Submit=Submit&amp;user_token=6baa787eef8dd909787e9a97202d6f91"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/xss_r/?name=&lt;script&gt;alert(&#39;XXS+Attacked&#39;)&lt;/script&gt;&amp;user_token=21fb49db4be756052a44afeea4e56f8b"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/?id=fpw=(select%20convert(int%2cCHAR(65)))&amp;Submit=Submit&amp;user_token=b7ffdc3fdcffbadf5338762ac81df6c7"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 4219,
+			"percent": "0.19"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli_blind/"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/?id=%&#39;+or+&#39;0&#39;=&#39;0&amp;Submit=Submit"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 89519,
+			"percent": "3.96"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/info.php"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/?id=%&#39;+or+&#39;0&#39;=&#39;0&amp;Submit=Submit&amp;user_token=da7bc47f8a2f651a1b72beed24fe4afa"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 0,
+			"percent": "0.00"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/logout.php"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 180,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/?id=%&#39;+or+&#39;0&#39;=&#39;0&amp;Submit=Submit&amp;user_token=e18580b2cccf1663aa02eee362deaad7"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/?id=%&#39;+or+&#39;0&#39;=&#39;0&amp;Submit=Submit&amp;user_token=41580c0eb9c0e2e8e13eb983710cffb2"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/sqli/?id=%&#39;+or+&#39;0&#39;=&#39;0&amp;Submit=Submit&amp;user_token=c748e5a7a0f2e1f2d9cd30779d74ad72"
+	},
+	{
+		"hits": {
+			"count": 1,
+			"percent": "0.63"
+		},
+		"visitors": {
+			"count": 1,
+			"percent": "33.33"
+		},
+		"bytes": {
+			"count": 204,
+			"percent": "0.01"
+		},
+		"method": "GET",
+		"protocol": "HTTP/1.1",
+		"data": "/dvwa/vulnerabilities/xss_r/?name=&lt;script&gt;alert(&#39;XXS+Attacked&#39;)&lt;/script&gt;"
+	}
+]
