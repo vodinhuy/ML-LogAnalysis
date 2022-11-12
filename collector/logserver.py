@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import struct
 import socket
 import websocket as ws
@@ -5,37 +6,49 @@ import websocket as ws
 HOST = "0.0.0.0"
 PORT = 5555
 BUF_SIZE = 4096
+logfile = open("output.txt", "w")
 
 
 def createSocket():
-	sck = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	sck.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-	sck.bind((HOST, PORT))
-	return sck
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+	sock.bind((HOST, PORT))
+	return sock
 
 
-def run(sck):
-	sck.listen(1)
+def storeLogs(loglines):
+	logfile.writelines(loglines)
+	logfile.flush()
+
+
+def listen(sock):
+	sock.listen(1)
 	print("Server listening on port", PORT)
-
-	c, addr = sck.accept()
+	c, addr = sock.accept()
 	print("Connect from ", str(addr))
+	handleClient(c)
+	logfile.close()
 
+
+def handleClient(con):
 	while True:
-		bs = c.recv(8)
-		(length,) = struct.unpack('>Q', bs)
+		chunk = con.recv(8)
+		if chunk == b'':
+			break
+		(length,) = struct.unpack('>Q', chunk)
 		data = b''
 		while len(data) < length:
 			to_read = length - len(data)
-			data += c.recv(min(to_read, BUF_SIZE))
+			data += con.recv(min(to_read, BUF_SIZE))
 
 		assert len(b'\00') == 1
-		c.sendall(b'\00')
+		con.sendall(b'\00')
 		print("Received", len(data), "bytes.")
 		loglines = data.decode().split("<br>")
-		ws.sendLogs(loglines)
+		# ws.sendLogs(loglines)
+		storeLogs(loglines)
 
 
 if __name__ == "__main__":
-	sck = createSocket()
-	run(sck)
+	sock = createSocket()
+	listen(sock)
