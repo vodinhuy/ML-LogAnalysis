@@ -53,6 +53,13 @@ void TcpClient::sendmessage(const char *msg)
     send(sock, ptr, HDR_SIZE, 0);
     send(sock, msg, strlen(msg), 0);
     printf("%s\n", msg);
+    char buf[7] = {0};
+    int ack = read(sock, buf, 7);
+    printf("ACK: %d\n", ack);
+    if (strncmp(ACK_MSG, buf, strlen(ACK_MSG)) == 0)
+    {
+        printf("Received ACK %s\n", ACK_MSG);
+    }
 }
 
 char *TcpClient::recv()

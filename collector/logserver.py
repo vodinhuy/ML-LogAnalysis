@@ -6,6 +6,8 @@ import websocket as ws
 HOST = "0.0.0.0"
 PORT = 5555
 BUF_SIZE = 4096
+HDR_SIZE = 4
+ACK_MSG = b"<|ACK|>"
 logfile = open("output.txt", "w")
 
 
@@ -32,21 +34,21 @@ def listen(sock):
 
 def handleClient(con):
 	while True:
-		chunk = con.recv(8)
+		chunk = con.recv(HDR_SIZE)
 		if chunk == b'':
+			print("Client disconnected.")
 			break
-		(length,) = struct.unpack('>Q', chunk)
+		(length,) = struct.unpack('>L', chunk)
 		data = b''
 		while len(data) < length:
 			to_read = length - len(data)
 			data += con.recv(min(to_read, BUF_SIZE))
 
-		assert len(b'\00') == 1
-		con.sendall(b'\00')
 		print("Received", len(data), "bytes.")
 		loglines = data.decode().split("<br>")
 		# ws.sendLogs(loglines)
 		storeLogs(loglines)
+		con.send(ACK_MSG)
 
 
 if __name__ == "__main__":

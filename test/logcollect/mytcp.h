@@ -7,6 +7,7 @@
 
 #define BUF_SIZE 1024
 #define HDR_SIZE 4
+#define ACK_MSG  "<|ACK|>"
 // 0 -> Broadcast to all clients. You may specify the client id.
 // # 1 -> Message type. 2 -> binary, 1 -> text
 

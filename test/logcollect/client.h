@@ -7,7 +7,7 @@
 
 #define HOST "127.0.0.1"
 #define PORT 5555
-#define INTERVAL 10
+#define INTERVAL 100
 unsigned int ms = INTERVAL * 1000;
 
 class TcpClient

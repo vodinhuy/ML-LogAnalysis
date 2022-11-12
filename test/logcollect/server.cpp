@@ -119,6 +119,7 @@ char *TcpServer::recv(const int &socket)
         x += n;
     }
     printf("Recv: %ld bytes\n", strlen(data));
+    send(socket, ACK_MSG, 7, 0);
     return data;
 }
 
