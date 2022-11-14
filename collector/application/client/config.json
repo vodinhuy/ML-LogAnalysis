@@ -1,0 +1,6 @@
+{
+	"NAME": "centos7-apache",
+	"LOG_SERVER": "192.168.88.130",
+	"SERVER_PORT": 5555,
+	"ACCESS_LOG_PATH": "/var/log/httpd/access_log"
+}
