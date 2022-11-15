@@ -21,11 +21,13 @@ class LogWatcher:
         self._thread.join()
 
     def _readToEnd(self):
-        while True:
+        i = 0
+        while i < 100:
             line = self.logfile.readline()
             if not line:
                 break
             yield line
+            i += 1
 
     def _watchdog(self):
         while self._running:
@@ -36,11 +38,10 @@ class LogWatcher:
 
     def process_read_event(self, mask):
         if mask & selectors.EVENT_READ:
-            # loglines = self._readToEnd()
-            # msg = "<br>".join([line for line in loglines])
-            # if len(msg) > 0:
-            #     print(len(msg))
-            chunk = self.logfile.read(4096)
+            # chunk = self.logfile.read(4096)
+            loglines = self._readToEnd()
+            chunk = "<br>".join([line for line in loglines])
+
             if chunk:
                 print(f"Read {len(chunk)} bytes from log file.")
 

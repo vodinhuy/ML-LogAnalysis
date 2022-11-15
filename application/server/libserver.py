@@ -6,7 +6,7 @@ import struct
 
 
 class Message:
-    def __init__(self, selector, sock, addr, config):
+    def __init__(self, selector, sock, addr, config, event_handler=None):
         self.selector = selector
         self.sock = sock
         self.addr = addr
@@ -17,6 +17,7 @@ class Message:
         self.request = None
         self.response_created = False
         self._config = config
+        self.event_handler = event_handler
 
     def _set_selector_events_mask(self, mode):
         """Set selector to listen for events: mode is 'r', 'w', or 'rw'."""
@@ -205,6 +206,8 @@ class Message:
             print(
                 f"Received {len(data)} bytes from {self.addr} ({self.request['client']})")
             print(f"Data length: {len(self.request['data'])}")
+            if self.event_handler:
+                self.event_handler.process_data(self.request)
         else:
             # Binary or unknown content-type
             self.request = data
