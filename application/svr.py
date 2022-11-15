@@ -27,6 +27,7 @@ class LogServer:
     def __init__(self, config_file) -> None:
         self.selector = selectors.DefaultSelector()
         self.event_handler = EventHandler()
+        self.wsock = ws.WebSocket()
         with open(config_file, "r") as f:
             self.config = json.load(f)
 
