@@ -22,7 +22,7 @@ class LogWatcher:
 
     def _readToEnd(self):
         i = 0
-        while i < 100:
+        while i < 50:
             line = self.logfile.readline()
             if not line:
                 break

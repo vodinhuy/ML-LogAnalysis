@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import socket
 import selectors
 import traceback
@@ -21,7 +20,7 @@ class EventHandler:
         for line in loglines:
             docs.append(logparser.parse(line))
         res = dbutil.insertDocs(self.db["weblogs"], docs)
-        # print(f"{len(res)} docs inserted.")
+        print(f"{len(res)} docs inserted.")
 
 
 class LogServer:

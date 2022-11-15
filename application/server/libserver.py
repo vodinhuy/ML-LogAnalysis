@@ -135,6 +135,7 @@ class Message:
             to_read = self.jsonheader["content-length"] - \
                 len(self._recv_buffer)
             self._read(to_read)
+        print(f"READ: {len(self._recv_buffer)}, content-length: {self.jsonheader['content-length']}")
         self.process_request()
 
     def write(self):

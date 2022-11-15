@@ -11,8 +11,7 @@ def get_database():
 def insertDoc(collection, doc):
 	#doc = { "name": "John", "address": "Highway 37" }
 	res = collection.insert_one(doc)
-	print(res.inserted_id)
-	return res
+	return res.inserted_id
 
 
 def insertDocs(collection, docList):
@@ -22,8 +21,7 @@ def insertDocs(collection, docList):
 	#     {"name": "Michael", "address": "Valley 345"}
 	# ]
 	res = collection.insert_many(docList)
-	print(res.inserted_ids)
-	return res
+	return res.inserted_ids
 
 
 def deleteAll(collection):
