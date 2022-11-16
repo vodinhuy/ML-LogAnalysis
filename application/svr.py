@@ -4,14 +4,18 @@ import traceback
 import json
 
 import server.libserver as libserver
-import utils.dbutil as dbutil
+import utils.dbadapter as dbadapter
 import utils.websocket as ws
 import utils.logparser as logparser
+
+dba = dbadapter.DBAdapter()
+dba.get_database()
+wsock = ws.WebSocket(dba)
 
 
 class EventHandler:
     def __init__(self) -> None:
-        self.db = dbutil.get_database()
+        pass
 
     def process_data(self, pkg):
         docs = []
@@ -19,15 +23,15 @@ class EventHandler:
         loglines = pkg["data"].split("<br>")
         for line in loglines:
             docs.append(logparser.parse(line))
-        res = dbutil.insertDocs(self.db["weblogs"], docs)
+        res = dba.insert_docs("weblogs", docs)
+        wsock.send_logs(docs)
         print(f"{len(res)} docs inserted.")
 
 
 class LogServer:
     def __init__(self, config_file) -> None:
         self.selector = selectors.DefaultSelector()
-        self.event_handler = EventHandler()
-        self.wsock = ws.WebSocket()
+        self._event_handler = EventHandler()
         with open(config_file, "r") as f:
             self.config = json.load(f)
 
@@ -42,14 +46,14 @@ class LogServer:
         print(f"Listening on {(host, port)}")
         lsock.setblocking(False)
         self.selector.register(lsock, selectors.EVENT_READ, data=None)
-        dbutil.deleteAll(dbutil.get_database()["weblogs"])
+        # dba.delete_all("weblogs")
 
     def accept_wrapper(self, sock):
         conn, addr = sock.accept()  # Should be ready to read
         print(f"Accepted connection from {addr}")
         conn.setblocking(False)
         message = libserver.Message(
-            self.selector, conn, addr, self.config, event_handler=self.event_handler)
+            self.selector, conn, addr, self.config, event_handler=self._event_handler)
         self.selector.register(conn, selectors.EVENT_READ, data=message)
 
     def run_loop(self):
