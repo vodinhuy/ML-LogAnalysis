@@ -86,7 +86,7 @@ var user_interface = {
       {
         colWidth: "6%",
         dataType: "string",
-        key: "class",
+        key: "label",
         label: "Label",
       },
       {
