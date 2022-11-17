@@ -14,7 +14,7 @@ msg_types = {
 }
 
 commands = ["load_logs"]
-fields = ["ip", "time", "method", "data", "protocol", "ua"]
+fields = ["label", "ip", "time", "method", "data", "protocol", "ua"]
 
 
 class WebSocket:

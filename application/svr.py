@@ -7,10 +7,13 @@ import server.libserver as libserver
 import utils.dbadapter as dbadapter
 import utils.websocket as ws
 import utils.logparser as logparser
+import mlanalysis.logclf as logclf
 
 dba = dbadapter.DBAdapter()
 dba.get_database()
 wsock = ws.WebSocket(dba)
+mylogclf = logclf.LogCLF()
+mylogclf.load_model("mlanalysis/models/testmodel.pkl")
 
 
 class EventHandler:
@@ -22,7 +25,9 @@ class EventHandler:
         # client_name = pkg["client"]
         loglines = pkg["data"].split("<br>")
         for line in loglines:
-            docs.append(logparser.parse(line))
+            doc = logparser.parse(line)
+            doc.update(label=mylogclf.classify(line))
+            docs.append(doc)
         res = dba.insert_docs("weblogs", docs)
         wsock.send_logs(docs)
         print(f"{len(res)} docs inserted.")
