@@ -14,8 +14,8 @@ class Message:
         self._send_buffer = b""
         self._jsonheader_len = None
         self.jsonheader = None
+        self.method_type = None  # GET or POST
         self.request = None
-        self.response_created = False
         self._config = config
         self.event_handler = event_handler
 
@@ -135,17 +135,19 @@ class Message:
             to_read = self.jsonheader["content-length"] - \
                 len(self._recv_buffer)
             self._read(to_read)
-        print(f"READ: {len(self._recv_buffer)}, content-length: {self.jsonheader['content-length']}")
-        self.process_request()
+        print(
+            f"READ: {len(self._recv_buffer)}, content-length: {self.jsonheader['content-length']}")
+        if self.jsonheader["content-type"] == "text/data":
+            self.method_type = "POST"
+            self.process_post()
+        else:
+            self.method_type = "GET"
+            self.process_request()
 
     def write(self):
-        if self.request:
-            if not self.response_created:
-                self.create_response()
-                self._write()
-                self._set_selector_events_mask("r")
-        else:
-            pass
+        self.create_response()
+        self._write()
+        self._set_selector_events_mask("r")
 
     def close(self):
         print(f"Closing connection to {self.addr}")
@@ -201,14 +203,6 @@ class Message:
             print(f"Received request {self.request!r} from {self.addr}")
             # Set selector to listen for write events, we're done reading.
             self._set_selector_events_mask("w")
-        elif self.jsonheader["content-type"] == "text/data":
-            encoding = self.jsonheader["content-encoding"]
-            self.request = self._json_decode(data, encoding)
-            print(
-                f"Received {len(data)} bytes from {self.addr} ({self.request['client']})")
-            print(f"Data length: {len(self.request['data'])}")
-            if self.event_handler:
-                self.event_handler.process_data(self.request)
         else:
             # Binary or unknown content-type
             self.request = data
@@ -217,12 +211,30 @@ class Message:
             # Set selector to listen for write events, we're done reading.
             self._set_selector_events_mask("w")
 
+    def process_post(self):
+        content_len = self.jsonheader["content-length"]
+        if not len(self._recv_buffer) >= content_len:
+            return
+        data = self._recv_buffer[:content_len]
+        self._recv_buffer = self._recv_buffer[content_len:]
+        encoding = self.jsonheader["content-encoding"]
+        json_data = self._json_decode(data, encoding)
+        print(
+            f"Received {len(data)} bytes from {self.addr} ({json_data['client']})")
+        print(f"Data length: {len(json_data['data'])}")
+        if self.event_handler:
+            self.event_handler.process_data(json_data)
+        self._set_selector_events_mask("w")
+
     def create_response(self):
-        if self.jsonheader["content-type"] == "text/json":
-            response = self._create_response_json_content()
+        if self.method_type == "POST":
+            self._send_buffer = b"<|ACK|>"
         else:
-            # Binary or unknown content-type
-            response = self._create_response_binary_content()
-        message = self._create_message(**response)
-        self.response_created = True
-        self._send_buffer += message
+            if self.jsonheader["content-type"] == "text/json":
+                response = self._create_response_json_content()
+            else:
+                # Binary or unknown content-type
+                response = self._create_response_binary_content()
+            message = self._create_message(**response)
+            self._send_buffer += message
+            self.request = None

@@ -50,13 +50,15 @@ class LogServer:
         lsock.listen()
         print(f"Listening on {(host, port)}")
         lsock.setblocking(False)
+        # lsock.settimeout(3)
         self.selector.register(lsock, selectors.EVENT_READ, data=None)
-        # dba.delete_all("weblogs")
+        dba.delete_all("weblogs")
 
     def accept_wrapper(self, sock):
         conn, addr = sock.accept()  # Should be ready to read
         print(f"Accepted connection from {addr}")
         conn.setblocking(False)
+        conn.settimeout(3)
         message = libserver.Message(
             self.selector, conn, addr, self.config, event_handler=self._event_handler)
         self.selector.register(conn, selectors.EVENT_READ, data=message)

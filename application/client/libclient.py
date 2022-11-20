@@ -22,6 +22,7 @@ class Message:
         self.jsonheader = None
         self.response = None
         self.configuration = None
+        self.logw = None
 
     def _set_selector_events_mask(self, mode):
         print(f"set_selector_events_mask: {mode}")
@@ -45,7 +46,11 @@ class Message:
             pass
         else:
             if data:
-                self._recv_buffer += data
+                if self.configuration and self.configuration.get("ACK_MSG") == data.decode():
+                    if self.logw:
+                        self.logw.nofify_done()
+                else:
+                    self._recv_buffer += data
             else:
                 raise RuntimeError("Peer closed.")
 
@@ -156,10 +161,9 @@ class Message:
     def write(self):
         if not self._config_loaded:
             self.send_request("configuration")
-            self._write()
-            self._set_selector_events_mask("r")
-        else:
-            self._write()
+
+        self._write()
+        self._set_selector_events_mask("r")
 
     def close(self):
         print(f"Closing connection to {self.addr}")
@@ -251,5 +255,5 @@ class Message:
         }
         req = self._create_post(content)
         message = self._create_message(**req)
-        self._send_buffer += message
+        self._send_buffer = message
         self._set_selector_events_mask("w")
