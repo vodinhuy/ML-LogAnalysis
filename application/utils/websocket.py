@@ -4,6 +4,7 @@ import json
 import select
 import threading
 import traceback
+from datetime import datetime
 from . import dbadapter
 
 msg_types = {
@@ -14,7 +15,26 @@ msg_types = {
 }
 
 commands = ["load_logs"]
-fields = ["label", "ip", "time", "method", "data", "protocol", "ua"]
+fields = ["index", "label", "ip", "time", "method", "data", "protocol", "ua", "status"]
+ips = set()
+overall_stats = {
+    "total": 0,
+    "normal": 0,
+    "anomal": 0,
+    "uniq_visitors": 0,
+    "date_time": ""
+}
+
+
+def update_overall_stats(docs):
+    overall_stats["date_time"] = datetime.now().strftime(
+        "%Y-%m-%d %H:%M:%S %z")
+    overall_stats["total"] += len(docs)
+    labels = [doc["label"] for doc in docs]
+    [ips.add(doc["ip"]) for doc in docs]
+    overall_stats["normal"] += labels.count("Normal")
+    overall_stats["anomal"] += labels.count("Anomalous")
+    overall_stats["uniq_visitors"] = len(ips)
 
 
 class WebSocket:
@@ -23,6 +43,7 @@ class WebSocket:
         self._thread = threading.Thread(target=self._recv_data, daemon=True)
         self._thread.start()
         self.client_list = {}
+        self.updated = False
 
     def _send_msg(self, msg, clientid=0):
         fifo = open("/tmp/wspipein.fifo", "wb")
@@ -92,11 +113,21 @@ class WebSocket:
         if cmd == "load_logs":
             docs = self.dba.find_all("weblogs")
             items = self._log_items(docs)
-            self._send_msg(self._json_encode(items), clientid)
+            if not self.updated:
+                update_overall_stats(items)
+                self.updated = True
+            self._send_msg(self._json_encode({
+                "overall_stats": overall_stats,
+                "items": items
+            }), clientid)
             print(f"<Send> {len(items)} log records to client {clientid}")
         else:
             pass
 
     def send_logs(self, docs):
+        update_overall_stats(docs)
         items = self._log_items(docs)
-        self._send_msg(self._json_encode(items))
+        self._send_msg(self._json_encode({
+            "overall_stats": overall_stats,
+            "items": items
+        }))

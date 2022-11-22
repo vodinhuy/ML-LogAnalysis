@@ -18,6 +18,6 @@ class LogCLF:
     def classify(self, log_item: str) -> str:
         test_inp = logproc.get_input_test(log_item)
         if not test_inp:
-            return ""
+            return "Normal"
         ans = self._predict_test(test_inp)
         return labels.get(ans[0])

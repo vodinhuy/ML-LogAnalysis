@@ -26,7 +26,8 @@ class EventHandler:
         loglines = pkg["data"].split("<br>")
         for line in loglines:
             doc = logparser.parse(line)
-            doc.update(label=mylogclf.classify(line))
+            doc.update(label=mylogclf.classify(line),
+                       index=dba._get_next_sequence("logid"))
             docs.append(doc)
         res = dba.insert_docs("weblogs", docs)
         wsock.send_logs(docs)
@@ -53,6 +54,7 @@ class LogServer:
         # lsock.settimeout(3)
         self.selector.register(lsock, selectors.EVENT_READ, data=None)
         dba.delete_all("weblogs")
+        dba._reset_counter("logid")
 
     def accept_wrapper(self, sock):
         conn, addr = sock.accept()  # Should be ready to read

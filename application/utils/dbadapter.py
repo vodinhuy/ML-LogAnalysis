@@ -32,3 +32,22 @@ class DBAdapter:
     def filter_docs(self, col_name: str, query):
         docs = self.db[col_name].find(query)
         return docs
+
+    def _create_counter(self, name: str):
+        try:
+            res = self.db["counters"].insert_one({
+                "_id": name,
+                "seq": 0
+            })
+            return res.inserted_id == name
+        except Exception:
+            return False
+
+    def _reset_counter(self, name: str):
+        self.db["counters"].update_one(filter={"_id": name},
+                                       update={"$set": {"seq": 0}})
+
+    def _get_next_sequence(self, name: str):
+        res = self.db["counters"].find_one_and_update(filter={"_id": name},
+                                                      update={"$inc": {"seq": 1}})
+        return res["seq"]
